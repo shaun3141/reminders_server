@@ -7,48 +7,23 @@ const moment = require('moment');
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const appGenerator = require('./models/appGenerator.js');
 const db = require('./models/db.js');
-const snooze = require('./models/snooze.js');
-const auth = require('./models/auth.js');
-const helpscout = require('./models/helpscout.js');
 
 const app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post('/app', (req, res) => {
-  appGenerator.getApp(req.body, res);
-});
-
-app.get('/app', (req, res) => {
-  res.redirect('/');
-});
-
-app.get('/auth/', (req, res) => { 
-  let code = req.query.code;
-  auth.signIn(code, res);
-});
-
-app.get('/snooze/', (req, res) => { 
-  // Add Snooze to DB
-  snooze.snoozeConversation(
-    req.query.convoId,
-    req.query.mailboxId,
-    req.query.userId,
-    req.query.openIn,
-    res
-  )
-});
-
-app.get('/alarm_clock/', (req, res) => { 
-  // Wake up conversations
-  snooze.wakeUpAll();
-  res.status(200).send("Waking up all conversations now");
-});
-
 app.use(express.static(path.join(__dirname, './../web/')));
+
+app.post('/ping', (req, res) => {
+  res.status(200).send('Pong');
+});
+
+app.post('/send_reminder', (req, res) => {
+  console.log(req.body);
+  res.status(200).send('Pong2');
+});
 
 // const msg = {
 //   to: 'shaun.t.vanweelden@gmail.com',
@@ -70,4 +45,4 @@ app.use(express.static(path.join(__dirname, './../web/')));
 // console.log(moment.duration(-10, "seconds").humanize());
 
 app.listen(process.env.PORT || 8082);
-console.log("Server running on http://localhost:" + (process.env.PORT || 8082));
+console.log('Server running on http://localhost:' + (process.env.PORT || 8082));
