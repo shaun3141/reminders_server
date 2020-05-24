@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Fonts-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <title>SnoozeBot</title>
+    <meta name="description" content="SnoozeBot is a tool to 'snooze' conversations in Help Scout, a popular customer support platform.">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta property="og:title" content="SnoozeBot">
+    <meta property="og:description" content="SnoozeBot is a tool to 'snooze' conversations in Help Scout, a popular customer support platform.">
+    <meta property="og:image" content="https://snooze-bot.com/img/fb_cover.png">
+    <meta property="og:url" content="https://snooze-bot.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="SnoozeBot">
+    <meta name="twitter:image:alt" content="SnoozeBot">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+        
+
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        background-color: #fff;
+        color: #333;
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      main {
+        flex: 1 0 auto;
+      }
+
+      .divider {
+        background-color: #ffc434;
+        height: 5px;
+        border-radius: 5px;
+        margin: 15px;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+      }
+
+      .introStep  {
+        padding-top: 30px !important;
+      }
+
+      .stepHeader {
+        font-weight: bold;
+        font-size: 1.5em;
+      }
+
+      .stepText {
+        font-size: 1.3em;
+      }
+
+      .stepImg {
+        width: 90%;
+      }
+
+      #urlBox {
+        background-color: #eee;
+        display: inline-block;
+        padding: 5px;
+        border-radius: 5px;
+        border: solid 1px #ddd;
+        margin-bottom: 25px;
+    }    
+
+      @media only screen and (min-width: 601px) {
+        #step2 {
+          margin-top: 85px;
+        }
+
+        #step3 {
+          margin-top: 200px;
+        }
+
+        #urlBox {
+          margin-left: 66px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="container">
+      <div class="row">
+        <div class="s12" style="text-align: center; margin-top: 1em;">
+          <div style="display: inline-block; vertical-align: top;">
+              <h1 style="font-size: 3.2em">SnoozeBot</h1>
+          </div>
+          <img style="margin-top: 1.8em; height: 5.2em;" src="img/snooze_emoji_md.png">
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <!-- Tagline -->
+        <div class="row">
+          <div class="col s12 m4 offset-m4" style="text-align: center; margin-top: -35px;">
+              <h2 style="font-size: 1.5em">SnoozeBot makes snoozing conversations in Help Scout super easy.</h2>
+          </div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="row">
+          <div class="col s12 m4 introStep" id="step1">
+              <div class="stepHeader">1) PICK A TIME</div>
+              <div class="stepText">Click when you want to see this conversation again</div>
+              <img class="stepImg" src="img/step1.png">
+          </div>
+
+          <!-- Step 2 -->
+          <div class="col s12 m4 introStep" id="step2">
+              <div class="stepHeader">2) SNOOZE</div>
+              <div class="stepText">SnoozeBot adds a note and makes the conversation "Pending"</div>
+              <img class="stepImg" src="img/step2.png">
+          </div>
+
+          <!-- Step 3 -->
+          <div class="col s12 m4 introStep" id="step3">
+              <div class="stepHeader">3) WAKE UP</div>
+              <div class="stepText">When the time is up, SnoozeBot will automatically re-open your conversation and add a little note</div>
+              <img class="stepImg" src="img/step3.png">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="divider" style="margin-top: 40px;"></div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 stepHeader" style="margin-bottom: 20px;">It's just as easy to install</div>
+          <div class="col s12 stepText">
+            <p><b>Step 1:</b> Head to the <a href="https://secure.helpscout.net/apps/custom/" target="_blank">Create Custom App<i class="material-icons">open_in_new</i></a> page in Help Scout</p>
+          </div>
+          <div class="col s12 stepText">
+            <p><b>Step 2:</b> Click <b>Create Application</b></p>
+          </div>
+          <div class="col s12 stepText">
+              <p><b>Step 3:</b> Enter <b>SnoozeBot</b> as the App Name, set Content Type to be <b>Dynamic</b> and add a word to the <b>Secret Key</b> input box</p>
+          </div>
+          <div class="col s12 stepText">
+              <div style="margin-top: 15px;"><b>Step 4:</b> The Callback URL should be set to Snoozebot's App URL</div>
+              <div id="urlBox">https://www.snooze-bot.com/app</div>
+          </div>
+          <div class="col s12 stepText">
+              <div><b>Step 5:</b> Enable the Mailboxes you want SnoozeBot in and <b>Save</b></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="divider" style="margin-top: 40px;"></div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 stepHeader" style="margin-bottom: 20px;">SnoozeBot is in Beta Mode</div>
+          <div class="col s12 stepText"><p>
+            SnoozeBot was designed and created by a Customer Support Team Lead who wanted to have a better way to stay on top of conversations throughout the day. 
+            SnoozeBot has been a weekend project and labor of love that I wanted to share with the amazing support community that uses and depends on Help Scout every day.
+          </p><p>
+            You should expect SnoozeBot to be around for awhile and work as described above, but it's probably not perfect. 
+            If you see any odd behavior or have some feedback about how the tool could be better, please do <a href="mailto:support@snooze-bot.com">get in touch</a>!
+          </p><p>
+            All the best on your Support Journey and happy Snoozing!
+          </p><p>
+            -Shaun
+          </p></div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="page-footer" style="padding: 10px; background-color: #333;">
+      <div class="container">
+        © <script type="text/javascript">document.write(new Date().getFullYear());</script> SnoozeBot 
+        | <a href="mailto:support@snooze-bot.com" style="color: white; text-decoration: none;">support@snooze-bot.com</a>
+      </div>
+    </footer>
+
+    <!-- Modal Trigger -->
+  <!-- <a class="waves-effect purple accent-2 btn modal-trigger" href="#modal1">Subscribe</a> -->
+
+    <!-- Subscribe Modal -->
+    <!-- <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4 style="font-size: 24px">You're Awesome</h4>
+        <p>We'd love to send you an email when we have a new episode for you to listen to.</p>
+        <div class="input-field col s12">
+            <input id="email" type="email" class="validate">
+            <label for="email">Your Email</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div id="subscribeModalBtn" class="modal-close waves-effect waves-purple accent-2 btn-flat">Subscribe</div>
+      </div>
+    </div> -->
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, {});
+      }); 
+      
+      /*
+      function subscribe(email) {
+        console.log('"' + email + '" tried to be subscribed!');
+        $.ajax({
+          type: "POST",
+          url: "/addSubscriber",
+          data: JSON.stringify({"email": email}),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(res) {
+            console.log(res);
+            if (res.status != "subscribed") {
+              M.toast({html: "Error: " + res.detail.split(". ")[0], classes: 'rounded purple accent-2'});
+              // Grab first sentence of error message. Second sentence is usually for developers.
+            } else {
+              M.toast({html: "You're subscribed, thanks!", classes: 'rounded purple accent-2'});
+            }
+          }
+        });
+      }
+
+      document.getElementById("subscribeModalBtn").onclick = function() {
+        // Grab Email
+        let email = $("#email").val()
+        subscribe(email)
+      };
+      */
+
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141945695-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-141945695-1');
+    </script>
+
+  </body>
+</html>
