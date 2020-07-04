@@ -20,6 +20,8 @@ app.post('/ping', (req, res) => {
 });
 
 app.post('/send_reminder', (req, res) => {
+  console.log(payload);
+
   const payload = req.body;
 
   const currentUser =
