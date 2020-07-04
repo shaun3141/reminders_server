@@ -136,7 +136,9 @@ let makeHtml = function(payload, config, recipients) {
 
           <div style="padding-top: 7px"></div>
           <div style="padding-left: 10px;">
-            <b>Owner: </b>${recipients.map(_ => _.name).join()} (that's you!)
+            <b>Owner: </b>${recipients
+              .map(_ => _.name)
+              .join(', ')} (that's you!)
           </div>
 
           ${
