@@ -41,7 +41,7 @@ app.post('/send_reminder', (req, res) => {
 
   const msg = {
     to: recipients.map(_ => _.email),
-    from: 'shaun@snooze-bot.com',
+    from: 'AirRemind<support@snooze-bot.com>',
     subject: `[${payload.base.name}] ${
       currentUser.name.split()[0]
     } is reminding you of "${recordSubject}"`,
