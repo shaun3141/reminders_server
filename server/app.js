@@ -20,9 +20,9 @@ app.post('/ping', (req, res) => {
 });
 
 app.post('/send_reminder', (req, res) => {
-  console.log(payload);
-
   const payload = req.body;
+
+  console.log(payload);
 
   const currentUser =
     payload.base.collaboratorsById[payload.base.currentUserId];
