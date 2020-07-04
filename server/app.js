@@ -46,7 +46,7 @@ app.post('/send_reminder', (req, res) => {
       currentUser.name.split()[0]
     } is reminding you of "${recordSubject}"`,
     text: text,
-    html: makeHtml(payload, config)
+    html: makeHtml(payload, config, recipients)
   };
 
   try {
@@ -64,7 +64,7 @@ app.post('/send_reminder', (req, res) => {
 app.listen(process.env.PORT || 8082);
 console.log('Server running on http://localhost:' + (process.env.PORT || 8082));
 
-let makeHtml = function(payload, config) {
+let makeHtml = function(payload, config, recipients) {
   const currentUser =
     payload.base.collaboratorsById[payload.base.currentUserId];
   const tableId = payload.tableId;
@@ -72,7 +72,7 @@ let makeHtml = function(payload, config) {
   const message = payload.message;
   const recordSubject = payload.record[config.subjectField];
   const recordOwner = payload.record[config.ownerField];
-  const recordDetails = payload.record[config.summaryField];
+  const recordDetails = payload.record[config.detailsField];
   const recordDueDate = payload.record[config.dueDateField];
 
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -137,7 +137,7 @@ let makeHtml = function(payload, config) {
 
           <div style="padding-top: 7px"></div>
           <div style="padding-left: 10px;">
-            <b>Owner: </b>${recordOwner} (that's you!)
+            <b>Owner: </b>${recipients.map(_ => _.name).join()} (that's you!)
           </div>
 
           ${
