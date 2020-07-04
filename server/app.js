@@ -128,7 +128,7 @@ let makeHtml = function(payload, config, recipients) {
               ? `
               <div style="padding-top: 7px"></div>
               <div style="padding-left: 10px;">
-                <b>Details: </b>${recordDetails} (4 days ago)
+                <b>Details: </b>${recordDetails}
               </div>
               `
               : ''
