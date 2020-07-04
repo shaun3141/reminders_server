@@ -71,7 +71,6 @@ let makeHtml = function(payload, config, recipients) {
   const recordId = payload.recordId;
   const message = payload.message;
   const recordSubject = payload.record[config.subjectField];
-  const recordOwner = payload.record[config.ownerField];
   const recordDetails = payload.record[config.detailsField];
   const recordDueDate = payload.record[config.dueDateField];
 
@@ -129,7 +128,7 @@ let makeHtml = function(payload, config, recipients) {
               ? `
               <div style="padding-top: 7px"></div>
               <div style="padding-left: 10px;">
-                <b>Due Date: </b>${recordDetails} (2 days ago)
+                <b>Details: </b>${recordDetails} (4 days ago)
               </div>
               `
               : ''
@@ -145,7 +144,9 @@ let makeHtml = function(payload, config, recipients) {
               ? `
               <div style="padding-top: 7px"></div>
               <div style="padding-left: 10px;">
-                <b>Due Date: </b>${recordDueDate} (2 days ago)
+                <b>Due Date: </b>${
+                  'June 30th, 2020' /*recordDueDate */
+                } (4 days ago)
               </div>
               `
               : ''
