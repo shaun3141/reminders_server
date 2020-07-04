@@ -25,10 +25,13 @@ app.post('/send_reminder', (req, res) => {
   const currentUser =
     payload.base.collaboratorsById[payload.base.currentUserId];
 
-  const recordOwner = payload.record[payload.config.ownerField];
-  const recipients = Array.isArray(recordOwner) ? recordOwner : [recordOwner];
+  const config = payload.config[payload.viewId];
 
-  const recordSubject = payload.record[payload.config.subjectField];
+  const recordOwner = payload.record[config.ownerField];
+  const recipients = Array.isArray(recordOwner) ? recordOwner : [recordOwner];
+  console.log(recipients);
+
+  const recordSubject = payload.record[config.subjectField];
 
   let text = `Hello ${(recipients.length &&
     recipients.name &&
@@ -43,7 +46,7 @@ app.post('/send_reminder', (req, res) => {
       currentUser.name.split()[0]
     } is reminding you of "${recordSubject}"`,
     text: text,
-    html: makeHtml(payload)
+    html: makeHtml(payload, config)
   };
 
   try {
@@ -61,17 +64,16 @@ app.post('/send_reminder', (req, res) => {
 app.listen(process.env.PORT || 8082);
 console.log('Server running on http://localhost:' + (process.env.PORT || 8082));
 
-let makeHtml = function(payload) {
+let makeHtml = function(payload, config) {
   const currentUser =
     payload.base.collaboratorsById[payload.base.currentUserId];
-
   const tableId = payload.tableId;
   const recordId = payload.recordId;
   const message = payload.message;
-  const recordSubject = payload.record[payload.config.subjectField];
-  const recordOwner = payload.record[payload.config.ownerField];
-  const recordDetails = payload.record[payload.config.summaryField];
-  const recordDueDate = payload.record[payload.config.dueDateField];
+  const recordSubject = payload.record[config.subjectField];
+  const recordOwner = payload.record[config.ownerField];
+  const recordDetails = payload.record[config.summaryField];
+  const recordDueDate = payload.record[config.dueDateField];
 
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html
@@ -88,7 +90,7 @@ let makeHtml = function(payload) {
     <body
       style="width:100%;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0;"
     >
-      <div style="width: 100%; text-align: center;">
+      <div style="width: 100%; text-align: center; font-size: 1.3em">
         <div
           style="background-color: #fafafa;
       display: inline-block;
@@ -105,26 +107,50 @@ let makeHtml = function(payload) {
           <div style="padding-left: 10px;">
             ${currentUser.name.split()[0]} wanted to remind you...
           </div>
-          <div style="padding-top: 25px"></div>
-          <div style="padding-left: 10px; font-style: italic;">
-            ${message}
-          </div>
-          <div style="padding-top: 25px"></div>
+
+          ${
+            message
+              ? `
+              <div style="padding-top: 25px"></div>
+              <div style="padding-left: 10px; font-style: italic;">
+                ${message}
+              </div>
+              <div style="padding-top: 25px"></div>
+              `
+              : ''
+          }
+          
           <div style="padding-left: 10px;">
             <b>Subject: </b>${recordSubject}
           </div>
-          <div style="padding-top: 7px"></div>
-          <div style="padding-left: 10px;">
-            <b>Details: </b>${recordDetails}
-          </div>
+
+          ${
+            recordDetails
+              ? `
+              <div style="padding-top: 7px"></div>
+              <div style="padding-left: 10px;">
+                <b>Due Date: </b>${recordDetails} (2 days ago)
+              </div>
+              `
+              : ''
+          }
+
           <div style="padding-top: 7px"></div>
           <div style="padding-left: 10px;">
             <b>Owner: </b>${recordOwner} (that's you!)
           </div>
-          <div style="padding-top: 7px"></div>
-          <div style="padding-left: 10px;">
-            <b>Due Date: </b>${recordDueDate} (2 days ago)
-          </div>
+
+          ${
+            recordDueDate
+              ? `
+              <div style="padding-top: 7px"></div>
+              <div style="padding-left: 10px;">
+                <b>Due Date: </b>${recordDueDate} (2 days ago)
+              </div>
+              `
+              : ''
+          }
+
           <div style="text-align: center;">
             <a href="https://airtable.com/${tableId}/${recordId}">
               <div
