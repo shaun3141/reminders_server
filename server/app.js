@@ -22,8 +22,6 @@ app.post('/ping', (req, res) => {
 app.post('/send_reminder', (req, res) => {
   const payload = req.body;
 
-  console.log(payload);
-
   const currentUser =
     payload.base.collaboratorsById[payload.base.currentUserId];
 
@@ -75,10 +73,11 @@ let makeHtml = function(payload, config, recipients) {
   const recordSubject = payload.record[config.subjectField];
   const recordDetails = payload.record[config.detailsField];
   const recordDueDate = payload.record[config.dueDateField];
+  const dueDateMessage = payload.dueDateMessage;
 
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html
-    style="width:100%;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0;"
+    style="width:100%;font-family:lato, 'helvetica neue', h elvetica, arial, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0;"
   >
     <head>
       <meta charset="UTF-8" />
@@ -148,9 +147,9 @@ let makeHtml = function(payload, config, recipients) {
               ? `
               <div style="padding-top: 7px"></div>
               <div style="padding-left: 10px;">
-                <b>Due Date: </b>${
-                  'June 30th, 2020' /*recordDueDate */
-                } (4 days ago)
+                <b>Due Date: </b>${moment(
+                  new Date(recordDueDate).toISOString()
+                ).format('dddd, MMMM Do, YYYY')} (${dueDateMessage})
               </div>
               `
               : ''
